@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESCUE.AI - Disaster First Aid</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Logo Styling */
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #2c3e50;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 0.2rem 0.8rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: #ff4757;
+            background: none;
+            -webkit-text-fill-color: #ff4757;
+            margin-left: 0.2rem;
+            font-weight: 800;
+        }
+
+        .logo:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Header Adjustments */
+        header {
+            background: #ffffff;
+            padding: 1.5rem 5%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* First Aid Section Styling */
+        .first-aid-section {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .first-aid-section h2 {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .first-aid-section h2::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: #ff4757;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .first-aid-grid {
+            gap: 2rem;
+        }
+
+        .first-aid-card {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #ff4757;
+        }
+
+        .first-aid-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .first-aid-card h3 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .first-aid-card h3 i {
+            color: #ff4757;
+            font-size: 1.8rem;
+        }
+
+        .first-aid-card details {
+            margin-top: 1rem;
+        }
+
+        .first-aid-card summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: #34495e;
+            padding: 0.8rem;
+            background: #ecf0f1;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .first-aid-card summary:hover {
+            background: #dfe6e9;
+        }
+
+        .first-aid-card details[open] summary {
+            background: #ff4757;
+            color: white;
+        }
+
+        .first-aid-card details p, .first-aid-card details ul {
+            margin-top: 0.8rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .first-aid-card details ul {
+            list-style-type: none;
+        }
+
+        .first-aid-card details ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .first-aid-card details ul li::before {
+            content: '✔';
+            color: #27ae60;
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+        }
+
+        .first-aid-kit-section {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            margin-top: 2rem;
+        }
+
+        .first-aid-kit-section h2 {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .first-aid-kit-section h2::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: #ff4757;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .first-aid-list li {
+            padding: 0.8rem 0;
+            font-size: 1.1rem;
+            color: #34495e;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .first-aid-list li::before {
+            content: '🩺';
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">RESCUE<span>.AI</span></div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/news">News</a></li>
+                <li><a href="/map">Map</a></li>
+                <li><a href="/alerts">Alerts</a></li>
+                <li><a href="/firstaid" class="active">First Aid</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button class="sign-in" onclick="window.location.href='/auth'">Sign in</button>
+            <button class="register" onclick="window.location.href='/auth'">Register</button>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <h1>Disaster First Aid Management</h1>
+        <p>Learn essential first aid techniques and preparedness strategies to manage emergencies effectively.</p>
+    </section>
+
+    <div class="main-container">
+        <section class="first-aid-section">
+            <h2>Disaster-Specific Preparedness and First Aid</h2>
+            <div class="first-aid-grid">
+                <div class="first-aid-card">
+                    <h3><i class="fas fa-globe"></i> Earthquake</h3>
+                    <details>
+                        <summary>Before</summary>
+                        <ul>
+                            <li>Secure furniture, heavy objects, and appliances.</li>
+                            <li>Identify safe spots (under sturdy tables, doorways).</li>
+                            <li>Keep an emergency kit ready (water, food, flashlight).</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>During</summary>
+                        <ul>
+                            <li>Indoors: Drop, Cover, and Hold under a sturdy object. Stay away from windows.</li>
+                            <li>Outdoors: Move to an open area away from buildings, trees, and power lines.</li>
+                            <li>In a Vehicle: Stop safely away from bridges and buildings. Stay inside.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>After</summary>
+                        <ul>
+                            <li>Expect aftershocks; move to an open, safe location.</li>
+                            <li>Check for injuries and apply first aid.</li>
+                            <li>Inspect gas, water, and electrical lines for damage.</li>
+                            <li>Avoid using elevators and unstable structures.</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="first-aid-card">
+                    <h3><i class="fas fa-water"></i> Flood</h3>
+                    <details>
+                        <summary>Before</summary>
+                        <ul>
+                            <li>Identify high ground and evacuation routes.</li>
+                            <li>Store emergency supplies (food, water, batteries).</li>
+                            <li>Move valuables to upper floors.</li>
+                            <li>Keep sandbags ready to block water entry.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>During</summary>
+                        <ul>
+                            <li>Evacuate immediately if advised.</li>
+                            <li>Avoid walking or driving through floodwaters.</li>
+                            <li>Turn off gas and electricity if flooding starts.</li>
+                            <li>Move to higher floors or rooftops if trapped.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>After</summary>
+                        <ul>
+                            <li>Avoid contaminated water; it may contain sewage or chemicals.</li>
+                            <li>Disinfect everything touched by floodwater.</li>
+                            <li>Beware of structural damage before re-entering buildings.</li>
+                            <li>Watch out for snakes and other animals in the water.</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="first-aid-card">
+                    <h3><i class="fas fa-fire"></i> Fire</h3>
+                    <details>
+                        <summary>Before</summary>
+                        <ul>
+                            <li>Install smoke detectors and fire extinguishers.</li>
+                            <li>Have an evacuation plan and practice fire drills.</li>
+                            <li>Keep flammable materials away from heat sources.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>During</summary>
+                        <ul>
+                            <li>Small Fire: Use a fire extinguisher or cover with a wet cloth.</li>
+                            <li>Large Fire: Crawl low under smoke to escape.</li>
+                            <li>If Clothes Catch Fire: STOP, DROP, and ROLL.</li>
+                            <li>Avoid Elevators: Use stairs for evacuation.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>After</summary>
+                        <ul>
+                            <li>Call emergency services before re-entering.</li>
+                            <li>Check for injuries and get medical help.</li>
+                            <li>Inspect home structure for safety.</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="first-aid-card">
+                    <h3><i class="fas fa-wind"></i> Cyclone/Hurricane/Typhoon</h3>
+                    <details>
+                        <summary>Before</summary>
+                        <ul>
+                            <li>Secure outdoor items that may fly away.</li>
+                            <li>Reinforce windows and doors with shutters.</li>
+                            <li>Stock emergency food, water, and batteries.</li>
+                            <li>Stay updated with weather forecasts.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>During</summary>
+                        <ul>
+                            <li>Stay indoors, away from windows.</li>
+                            <li>Move to an interior room or basement.</li>
+                            <li>Avoid using electrical appliances during the storm.</li>
+                            <li>Evacuate if instructed by authorities.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>After</summary>
+                        <ul>
+                            <li>Watch out for fallen power lines and debris.</li>
+                            <li>Boil water before drinking.</li>
+                            <li>Contact family and authorities for updates.</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="first-aid-card">
+                    <h3><i class="fas fa-mountain"></i> Landslide</h3>
+                    <details>
+                        <summary>Before</summary>
+                        <ul>
+                            <li>Avoid building houses near steep slopes.</li>
+                            <li>Plant trees to reduce soil erosion.</li>
+                            <li>Identify evacuation routes in landslide-prone areas.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>During</summary>
+                        <ul>
+                            <li>Move to higher ground immediately.</li>
+                            <li>If driving, avoid hilly roads.</li>
+                            <li>Listen for unusual sounds (rumbling, cracking trees).</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>After</summary>
+                        <ul>
+                            <li>Stay away from affected areas to avoid further slides.</li>
+                            <li>Check for injuries and assist those in need.</li>
+                            <li>Report gas leaks and damaged power lines.</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="first-aid-card">
+                    <h3><i class="fas fa-wave-square"></i> Tsunami</h3>
+                    <details>
+                        <summary>Before</summary>
+                        <ul>
+                            <li>Know tsunami warning signs (earthquakes, sudden water retreat).</li>
+                            <li>Identify high-ground evacuation areas.</li>
+                            <li>Stay informed through radio or official alerts.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>During</summary>
+                        <ul>
+                            <li>Evacuate immediately if a tsunami warning is issued.</li>
+                            <li>Do not wait for official confirmation; move to higher ground.</li>
+                            <li>Avoid the beach and coastal areas.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>After</summary>
+                        <ul>
+                            <li>Stay away from flooded and damaged areas.</li>
+                            <li>Be prepared for aftershocks and secondary waves.</li>
+                            <li>Do not return to low-lying areas until given clearance.</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="first-aid-card">
+                    <h3><i class="fas fa-sun"></i> Drought</h3>
+                    <details>
+                        <summary>Before</summary>
+                        <ul>
+                            <li>Conserve water in daily use.</li>
+                            <li>Store emergency water supplies.</li>
+                            <li>Promote rainwater harvesting and afforestation.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>During</summary>
+                        <ul>
+                            <li>Avoid excessive water usage.</li>
+                            <li>Use drought-resistant crops for agriculture.</li>
+                            <li>Seek government aid for water supply and relief.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>After</summary>
+                        <ul>
+                            <li>Replenish groundwater through conservation methods.</li>
+                            <li>Monitor health conditions (dehydration, heat strokes).</li>
+                            <li>Plan long-term water management strategies.</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="first-aid-card">
+                    <h3><i class="fas fa-virus"></i> Pandemic (COVID-19, Flu, etc.)</h3>
+                    <details>
+                        <summary>Before</summary>
+                        <ul>
+                            <li>Maintain hygiene and stock essential medicines.</li>
+                            <li>Follow vaccination programs.</li>
+                            <li>Develop remote work/study plans.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>During</summary>
+                        <ul>
+                            <li>Wear masks and maintain social distancing.</li>
+                            <li>Stay informed through reliable sources.</li>
+                            <li>Seek medical help if symptoms develop.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>After</summary>
+                        <ul>
+                            <li>Continue hygiene practices to prevent recurrence.</li>
+                            <li>Support community recovery programs.</li>
+                            <li>Strengthen healthcare infrastructure.</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section class="first-aid-kit-section">
+            <h2>First Aid Kit Essentials</h2>
+            <ul class="first-aid-list">
+                <li>Bandages and gauze</li>
+                <li>Antiseptic wipes</li>
+                <li>Adhesive tape</li>
+                <li>Pain relievers</li>
+                <li>Scissors and tweezers</li>
+                <li>Thermometer</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 RESCUE.AI | AI-Driven Crisis Management Platform</p>
+    </footer>
+</body>
+</html>

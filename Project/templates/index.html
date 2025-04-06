@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESCUE.AI - AI-Powered Disaster Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+<body>
+    <header>
+        <div class="logo">RESCUE<span style="color: #007bff;">.AI</span></div>
+        <nav>
+            <ul>
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/news">News</a></li>
+                <li><a href="/map">Map</a></li>
+                <li><a href="/alerts">Alerts</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button class="sign-in" onclick="window.location.href='/auth'">Sign in</button>
+            <button class="register" onclick="window.location.href='/auth'">Register</button>
+        </div>
+    </header>
+    
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>RESCUE.AI - Intelligent Disaster Response</h1>
+            <div class="hero-buttons">
+                <button class="latest-updates" onclick="window.location.href='/news'">Live Updates</button>
+                <button class="emergency-btn" onclick="window.location.href='/alerts'">Emergency Alerts</button>
+            </div>
+        </div>
+    </section>
+    
+    <section id="news" class="news-section">
+        <h2>Latest Disaster Reports</h2>
+        <div class="news-feed" id="news-feed">
+            <!-- Dynamic news content will be loaded here -->
+        </div>
+    </section>
+    
+    <section id="map" class="map-section">
+        <h2>Live Disaster Tracking Map</h2>
+        <div id="disaster-map" style="height: 600px; width: 100%;"></div>
+    </section>
+    
+    <section id="risk" class="risk-section">
+        <h2>Regional Risk Assessment</h2>
+        <div id="disaster-risk-container">
+            <h3>Current Risk Level: <span id="disaster-risk">Calculating...</span></h3>
+        </div>
+    </section>
+    
+    <footer>
+        <p>© 2025 RESCUE.AI | AI-Driven Crisis Management Platform</p>
+    </footer>
+
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

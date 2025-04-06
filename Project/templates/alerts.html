@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESCUE.AI - Alerts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+<body>
+    <header>
+        <div class="logo">RESCUE<span style="color: #007bff;">.AI</span></div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/news">News</a></li>
+                <li><a href="/alerts" class="active">Alerts</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button class="sign-in" onclick="window.location.href='/auth'">Sign in</button>
+            <button class="register" onclick="window.location.href='/auth'">Register</button>
+        </div>
+    </header>
+    
+    <section class="page-header">
+        <h1>Emergency Alert System</h1>
+        <p>Report and monitor emergencies in real-time. All alerts are shared with emergency response teams.</p>
+    </section>
+    
+    <div class="main-container">
+        <section id="alert" class="alert-section">
+            <h2>Create Emergency Alert</h2>
+            <div class="alert-form">
+                <div class="form-group">
+                    <label for="alert-location">Location</label>
+                    <input type="text" id="alert-location" placeholder="Enter affected location">
+                </div>
+                
+                <div class="form-group">
+                    <label for="alert-severity">Severity Level</label>
+                    <select id="alert-severity">
+                        <option value="Low">Low</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="High">High</option>
+                        <option value="Critical">Critical</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="alert-description">Emergency Details</label>
+                    <textarea id="alert-description" placeholder="Describe the emergency situation in detail"></textarea>
+                </div>
+                
+                <button id="emergency-alert" class="alert-button">Trigger Emergency Alert</button>
+            </div>
+        </section>
+        
+        <section id="alerts-map" class="map-section">
+            <h2>Emergency Alerts Map</h2>
+            <div id="disaster-map" style="height: 400px; width: 100%;"></div>
+        </section>
+        
+        <section id="recent-alerts" class="recent-alerts-section">
+            <h2>Recent Alerts</h2>
+            <div class="filter-bar">
+                <select id="severity-filter">
+                    <option value="all">All Severities</option>
+                    <option value="Critical">Critical</option>
+                    <option value="High">High</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <ul id="alert-log" class="alert-list"></ul>
+        </section>
+    </div>
+    
+    <footer>
+        <p>© 2025 RESCUE.AI | AI-Driven Crisis Management Platform</p>
+    </footer>
+    
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

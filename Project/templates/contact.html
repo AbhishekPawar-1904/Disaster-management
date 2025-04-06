@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESCUE.AI - Contact</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">RESCUE<span style="color: #007bff;">.AI</span></div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/news">News</a></li>
+                <li><a href="/map">Map</a></li>
+                <li><a href="/alerts">Alerts</a></li>
+                <li><a href="/contact" class="active">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button class="sign-in" onclick="window.location.href='/auth'">Sign in</button>
+            <button class="register" onclick="window.location.href='/auth'">Register</button>
+        </div>
+    </header>
+    
+    <section class="page-header">
+        <h1>Contact Us</h1>
+        <p>Reach out to our team for support or information about emergency services.</p>
+    </section>
+    
+    <div class="contact-page-container">
+        <div class="emergency-contacts-container">
+            <h2>Emergency Contacts</h2>
+            <div class="emergency-contact-card">
+                <h3>National Emergency Helpline</h3>
+                <div class="emergency-number">112</div>
+            </div>
+            <div class="emergency-contact-card">
+                <h3>Police</h3>
+                <div class="emergency-number">100</div>
+            </div>
+            <div class="emergency-contact-card">
+                <h3>Fire</h3>
+                <div class="emergency-number">101</div>
+            </div>
+            <div class="emergency-contact-card">
+                <h3>Ambulance</h3>
+                <div class="emergency-number">102</div>
+            </div>
+        </div>
+        
+        <div class="contact-form-container">
+            <h2>Send Us a Message</h2>
+            <form id="contact-form">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <textarea id="message" placeholder="Your Message" required></textarea>
+                <button type="submit" class="send-message-button" onclick="alert('Message sent! We will get back to you soon.')">Send Message</button>
+            </form>
+            
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <ul class="contact-details">
+                    <li>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="186b6d6868776a6c586a7d6b7b6d7d367971">[email&#160;protected]</a></li>
+                    <li>Phone: +91 123-456-7890</li>
+                    <li>Address: 123 Emergency Avenue, New Delhi, India</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 RESCUE.AI | AI-Driven Crisis Management Platform</p>
+    </footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
